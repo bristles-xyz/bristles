@@ -23,7 +23,7 @@ export function ErrorPage (): JSX.Element {
 
 export const routes = createBrowserRouter([
   {
-    path: isDevMode ? '/bristles' : '/',
+    path: isDevMode ? '/bristles' : '/bristles',
     errorElement: <ErrorPage />,
     element: <AppLayout />,
     children: [{
