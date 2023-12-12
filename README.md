@@ -29,7 +29,7 @@ To get started with this project, follow these steps:
 3. Start the development server:
 
    ```bash
-   npm run start
+   turbo dev
    ```
 
 4. Open your web browser and navigate to `http://localhost:5173` to see the app running.
