@@ -1,0 +1,21 @@
+{
+  "name": "@bristles/schema",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.2",
+    "zod": "^3.22.4"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "dev": "npm run build -- --watch"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^1.0.4",
+    "vitest": "^1.0.4"
+  }
+}
