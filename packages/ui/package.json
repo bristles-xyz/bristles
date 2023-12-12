@@ -1,5 +1,5 @@
 {
-  "name": "@repo/ui",
+  "name": "@bristles/ui",
   "version": "0.0.0",
   "exports": {
     "./counter": "./components/counter.ts",
@@ -11,8 +11,8 @@
     "lint": "eslint \"**/*.ts\""
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@bristles/eslint-config": "*",
+    "@bristles/typescript-config": "*",
     "eslint": "^8.54.0",
     "typescript": "^5.3.2"
   }
