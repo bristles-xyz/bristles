@@ -1,5 +1,5 @@
 {
-  "name": "bristles.xyz",
+  "name": "@bristles/web",
   "homepage": "https://bristles-xyz.github.io/bristles/",
   "private": true,
   "version": "0.0.1",
@@ -55,11 +55,11 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4",
-    "@repo/ui": "*"
+    "@bristles/ui": "*"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@bristles/eslint-config": "*",
+    "@bristles/typescript-config": "*",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.8.6",
     "@types/react": "^18.2.15",
