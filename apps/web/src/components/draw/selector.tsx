@@ -1,12 +1,12 @@
-import { buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@bristles/ui/components/ui/button'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger
-} from '@/components/ui/popover'
+} from '@bristles/ui/components/ui/popover'
 import { BorderDashedIcon, BorderDottedIcon, BorderSolidIcon, BorderStyleIcon, CaretSortIcon, GroupIcon, PaddingIcon, TransparencyGridIcon } from '@radix-ui/react-icons'
-import { AppRadioGroup2 } from './components/radio-group'
-import { cn } from '@/lib/utils'
+import { AppRadioGroup2 } from '@bristles/ui/components/radio-group'
+import { cn } from '@bristles/ui/lib/utils'
 import { type ControlProps } from './hooks/use-drawing'
 
 const colorsStyleOptions = [

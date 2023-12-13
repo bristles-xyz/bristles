@@ -1,10 +1,10 @@
+import type { ElementSchemaType, FillPropertiesType, FontPropertiesType, StrokePropertiesType } from '@bristles/schema'
 import { type Point } from '../../lib/math/types'
 import { type ElementDrawingAction, type ElementMainAction } from './actions'
 
-export interface DrawFunctionProps<T> {
+export interface DrawFunctionProps {
   canvas: HTMLCanvasElement
   context: CanvasRenderingContext2D
-  element: T
   /*
   snapshot: ImageData | null
   currentPoint: Point
@@ -15,6 +15,7 @@ export interface DrawFunctionProps<T> {
   */
 }
 
+/*
 export interface FillProperties {
   style: 'Solid' | 'Semi1' | 'Semi2' | 'None'
 }
@@ -29,6 +30,7 @@ export interface FontProperties {
   family: string
   align: string
 }
+*/
 
 export interface ArrowProperties {
   style: string
@@ -38,10 +40,11 @@ export interface Properties {
   color: string
   opacity: number
 
-  fill?: FillProperties
-  stroke?: StrokeProperties
+  fill?: FillPropertiesType
+  stroke?: StrokePropertiesType
+  font?: FontPropertiesType
+
   arrow?: ArrowProperties
-  font?: FontProperties
   text?: string
 }
 
@@ -57,7 +60,7 @@ export interface GenericHandler<T> {
   /**
    * Función que dibuja dentro del canvas
    */
-  draw: (props: DrawFunctionProps<T>) => void
+  draw: (element: T, props: DrawFunctionProps) => void
 
   create: (props: ElementDrawingAction) => T
   toString: (element: T) => string

@@ -1,4 +1,4 @@
-import { ModeToggle } from '@/components/mode-toggle'
+import { ModeToggle } from '@bristles/ui/components/mode-toggle'
 
 export function AppAboutPage () {
   return (

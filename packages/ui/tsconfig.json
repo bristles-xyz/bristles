@@ -1,5 +1,12 @@
 {
-  "extends": "@bristles/typescript-config/base.json",
+  "extends": "@bristles/typescript-config/react-library.json",
   "include": ["."],
-  "exclude": ["node_modules"]
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@bristles/ui/*": ["./*"],
+      "@bristles/ui/components/ui*": ["./components/ui*"]
+    }
+  }
 }

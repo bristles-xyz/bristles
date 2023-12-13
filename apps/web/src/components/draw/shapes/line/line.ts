@@ -1,11 +1,11 @@
 import { type Properties, type DrawFunctionProps, type Position } from '../types/handler'
 import { distance, nearPoints } from '../../lib/math/math'
 import { type ElementDrawingAction, type ElementMainAction } from '../types/actions'
-import { type LineElement } from './types'
 import { Point } from '../../lib/math/types'
+import { LineSchema, type LineSchemaType } from '@bristles/schema'
 
-export function draw (props: DrawFunctionProps<LineElement>) {
-  const { context, element } = props
+export function draw (element: LineSchemaType, props: DrawFunctionProps) {
+  const { context } = props
 
   const fromPoint = { x: element.x, y: element.y }
   const toPoint = { x: element.x + element.width, y: element.y + element.height }
@@ -85,9 +85,9 @@ export function draw (props: DrawFunctionProps<LineElement>) {
  * @param {LineProperties} properties - The properties defining the line (e.g., width, height, etc.).
  * @returns {LineElement} - A LineElement object created with the provided current point and properties.
  */
-export function create (action: ElementDrawingAction): LineElement {
+export function create (action: ElementDrawingAction): LineSchemaType {
   const { currentPoint, properties } = action
-  const line: LineElement = {
+  const line: LineSchemaType = {
     id: crypto.randomUUID(),
     name: 'line',
     x: currentPoint.x,
@@ -113,7 +113,7 @@ export function create (action: ElementDrawingAction): LineElement {
  * @param {Point} currentPoint - The new current point representing the final position.
  * @returns {LineElement} - A new Element with the updated size based on the new current point.
  */
-function updateElement (oldElement: LineElement, currentPoint: Point): LineElement {
+function updateElement (oldElement: LineSchemaType, currentPoint: Point): LineSchemaType {
   const width = currentPoint.x - oldElement.x
   const height = currentPoint.y - oldElement.y
   const element = { ...oldElement, width, height }
@@ -125,7 +125,7 @@ function updateElement (oldElement: LineElement, currentPoint: Point): LineEleme
  * @param {LineElement} element - The Element to be rearranged.
  * @returns {LineElement} - The rearranged Element with position set in the top-left corner.
  */
-function cleanup (oldElement: LineElement): LineElement {
+function cleanup (oldElement: LineSchemaType): LineSchemaType {
   const toX = oldElement.x + oldElement.width
   const toY = oldElement.y + oldElement.height
 
@@ -153,7 +153,7 @@ function cleanup (oldElement: LineElement): LineElement {
  * @param {Point} offset - The offset point representing the change in position.
  * @returns {ElemenLineElementt} - A new Element moved to the new position based on the current point and offset.
  */
-function moveLine (oldElement: LineElement, currentPoint: Point, offset: Point): LineElement {
+function moveLine (oldElement: LineSchemaType, currentPoint: Point, offset: Point): LineSchemaType {
   const x = currentPoint.x - offset.x
   const y = currentPoint.y - offset.y
   const width = oldElement.width
@@ -168,7 +168,7 @@ function moveLine (oldElement: LineElement, currentPoint: Point, offset: Point):
  * @param {Position} position - The position ('start' or 'end') to reorder the initial point.
  * @returns {LineElement} - A new LineElement with the initial point reordered based on the position.
  */
-function reoderForResizeFromPosition (oldElement: LineElement, position: Position): LineElement {
+function reoderForResizeFromPosition (oldElement: LineSchemaType, position: Position): LineSchemaType {
   if (position.position === 'start') {
     const toX = oldElement.x + oldElement.width
     const toY = oldElement.y + oldElement.height
@@ -185,7 +185,7 @@ function reoderForResizeFromPosition (oldElement: LineElement, position: Positio
  * @param {ElementMainAction} action - The action to perform over the element.
  * @returns {LineElement} - Returns the created/update element
  */
-export function startAction (element: LineElement, action: ElementMainAction) {
+export function startAction (element: LineSchemaType, action: ElementMainAction) {
   switch (action.name) {
     case 'drawing':
       return create(action)
@@ -201,7 +201,7 @@ export function startAction (element: LineElement, action: ElementMainAction) {
  * @param {ElementMainAction} action - The action to perform over the element.
  * @returns {LineElement} - Returns the updated element
  */
-export function updateAction (element: LineElement, action: ElementMainAction) {
+export function updateAction (element: LineSchemaType, action: ElementMainAction) {
   switch (action.name) {
     case 'drawing':
       if (element !== undefined) {
@@ -222,7 +222,7 @@ export function updateAction (element: LineElement, action: ElementMainAction) {
  * @param {ElementMainAction} action - The action to perform over the element.
  * @returns {LineElement} - Returns the updated element
  */
-export function endAction (element: LineElement, action: ElementMainAction) {
+export function endAction (element: LineSchemaType, action: ElementMainAction) {
   switch (action.name) {
     case 'drawing': {
       if (element !== undefined) {
@@ -250,7 +250,7 @@ export function endAction (element: LineElement, action: ElementMainAction) {
  * @returns {Position} - Returns the position relative to the LineElement: 'start', 'end' if near the beginning or end,
  *                      'inside' if inside the element, or 'outside' if outside the element.
  */
-export function positionInElement (element: LineElement, point: Point): Position {
+export function positionInElement (element: LineSchemaType, point: Point): Position {
   const a: Point = { x: element.x, y: element.y }
   const b: Point = { x: element.x + element.width, y: element.y + element.height }
 
@@ -270,15 +270,16 @@ export function positionInElement (element: LineElement, point: Point): Position
   return { type: 'outside', cursor: 'default', position: '' }
 }
 
-export function toString (element: LineElement): string {
+export function toString (element: LineSchemaType): string {
   return JSON.stringify(element, null, 2)
 }
 
-export function fromString (element: string): LineElement {
-  return JSON.parse(element) as LineElement
+export function fromString (element: string): LineSchemaType {
+  const object = JSON.parse(element)
+  return LineSchema.parse(object)
 }
 
-export function copy (element: LineElement, point: Point): LineElement {
+export function copy (element: LineSchemaType, point: Point): LineSchemaType {
   return {
     ...element,
     id: crypto.randomUUID(),
@@ -287,7 +288,7 @@ export function copy (element: LineElement, point: Point): LineElement {
   }
 }
 
-export function update (element: LineElement, properties: Properties): LineElement {
+export function update (element: LineSchemaType, properties: Properties): LineSchemaType {
   return {
     ...element,
     color: properties.color,
@@ -301,6 +302,6 @@ export function allowedProperties (): string[] {
   return ['stroke', 'arrow']
 }
 
-export function properties (element: LineElement): Properties {
+export function properties (element: LineSchemaType): Properties {
   return { color: element.color, opacity: element.opacity, arrow: element.arrow, stroke: element.stroke }
 }

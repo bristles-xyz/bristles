@@ -1,11 +1,11 @@
+import type { ElementSchemaType, TextSchemaType } from '@bristles/schema'
 import { nearPoints } from '../../lib/math/math'
 import { Point } from '../../lib/math/types'
 import { ElementDrawingAction, ElementMainAction } from '../types/actions'
 import type { DrawFunctionProps, Position, Properties } from '../types/handler'
-import { type TextElement } from './types'
 
-export function draw (props: DrawFunctionProps<TextElement>) {
-  const { context, element } = props
+export function draw (element: ElementSchemaType, props: DrawFunctionProps) {
+  const { context } = props
 
   if (element.name === 'text') {
     context.textBaseline = 'top'
@@ -47,7 +47,7 @@ export function draw (props: DrawFunctionProps<TextElement>) {
  * @param {LineProperties} properties - The properties defining the line (e.g., width, height, etc.).
  * @returns {TextElement} - A LineElement object created with the provided current point and properties.
  */
-export function create (action: ElementDrawingAction): TextElement {
+export function create (action: ElementDrawingAction): TextSchemaType {
   const { currentPoint, properties } = action
   const userText = properties.text ?? 'Text'
   const element = document.createElement('canvas')
@@ -60,7 +60,7 @@ export function create (action: ElementDrawingAction): TextElement {
   const width = context.measureText(userText).width
 
   console.log(width)
-  const text: TextElement = {
+  const text: TextSchemaType = {
     id: crypto.randomUUID(),
     name: 'text',
     x: currentPoint.x,
@@ -85,7 +85,7 @@ export function create (action: ElementDrawingAction): TextElement {
  * @param {Point} offset - The offset point representing the change in position.
  * @returns {TextElement} - A new Element moved to the new position based on the current point and offset.
  */
-function moveText (oldElement: TextElement, currentPoint: Point, offset: Point): TextElement {
+function moveText (oldElement: TextSchemaType, currentPoint: Point, offset: Point): TextSchemaType {
   const x = currentPoint.x - offset.x
   const y = currentPoint.y - offset.y
   const width = oldElement.width
@@ -100,7 +100,7 @@ function moveText (oldElement: TextElement, currentPoint: Point, offset: Point):
  * @param {ElementMainAction} action - The action to perform over the element.
  * @returns {TextElement} - Returns the created/update element
  */
-export function startAction (element: TextElement, action: ElementMainAction) {
+export function startAction (element: TextSchemaType, action: ElementMainAction) {
   switch (action.name) {
     //case 'writing':
     //  return create(action)
@@ -119,7 +119,7 @@ export function startAction (element: TextElement, action: ElementMainAction) {
  * @param {ElementMainAction} action - The action to perform over the element.
  * @returns {TextElement} - Returns the updated element
  */
-export function updateAction (element: TextElement, action: ElementMainAction) {
+export function updateAction (element: TextSchemaType, action: ElementMainAction) {
   switch (action.name) {
     case 'drawing':
       if (element !== undefined) {
@@ -142,7 +142,7 @@ export function updateAction (element: TextElement, action: ElementMainAction) {
  * @param {ElementMainAction} action - The action to perform over the element.
  * @returns {TextElement} - Returns the updated element
  */
-export function endAction (element: TextElement, action: ElementMainAction) {
+export function endAction (element: TextSchemaType, action: ElementMainAction) {
   switch (action.name) {
     case 'drawing':
       if (element !== undefined) {
@@ -170,7 +170,7 @@ export function endAction (element: TextElement, action: ElementMainAction) {
  * @returns {Position} - Returns the position relative to the LineElement: 'start', 'end' if near the beginning or end,
  *                      'inside' if inside the element, or 'outside' if outside the element.
  */
-export function positionInElement (element: TextElement, point: Point): Position {
+export function positionInElement (element: TextSchemaType, point: Point): Position {
   if (nearPoints({ x: element.x, y: element.y }, point, 10)) {
     return { type: 'border', cursor: 'nwse-resize', position: 'tl' }
   }
@@ -198,15 +198,15 @@ export function positionInElement (element: TextElement, point: Point): Position
 }
 
 
-export function toString (element: TextElement): string {
+export function toString (element: TextSchemaType): string {
   return JSON.stringify(element, null, 2)
 }
 
-export function fromString (element: string): TextElement {
-  return JSON.parse(element) as TextElement
+export function fromString (element: string): TextSchemaType {
+  return JSON.parse(element) as TextSchemaType
 }
 
-export function copy (element: TextElement, point: Point): TextElement {
+export function copy (element: TextSchemaType, point: Point): TextSchemaType {
   return {
     ...element,
     id: crypto.randomUUID(),
@@ -215,7 +215,7 @@ export function copy (element: TextElement, point: Point): TextElement {
   }
 }
 
-export function update (element: TextElement, properties: Properties): TextElement {
+export function update (element: TextSchemaType, properties: Properties): TextSchemaType {
   return {
     ...element,
     color: properties.color,
@@ -229,6 +229,6 @@ export function allowedProperties (): string[] {
   return ['text', 'font']
 }
 
-export function properties (element: TextElement): Properties {
+export function properties (element: TextSchemaType): Properties {
   return { color: element.color, opacity: element.opacity, text: element.text, font: element.font }
 }

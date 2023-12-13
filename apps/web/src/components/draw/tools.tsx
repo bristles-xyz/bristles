@@ -1,6 +1,6 @@
 import { ArrowLeftIcon, ArrowRightIcon, CaretSortIcon, CopyIcon, DragHandleDots2Icon, LayersIcon, TrashIcon } from '@radix-ui/react-icons'
 import { FillSelector } from './selector'
-import { Button } from '../ui/button'
+import { Button } from '@bristles/ui/components/ui/button'
 import { type ControlProps } from './hooks/use-drawing'
 
 interface ToolsProps {

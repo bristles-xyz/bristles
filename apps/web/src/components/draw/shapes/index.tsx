@@ -5,7 +5,7 @@ import { type Shapes } from '../types'
 
 type Handlers = RectangleHandler | TextHandler | LineHandler
 
-export const ShapeHandler = (shape: Shapes): Handlers => {
+export const ShapeHandler = (shape: Shapes): Handlers=> {
   switch (shape) {
     case 'rectangle':
       return Rectangle

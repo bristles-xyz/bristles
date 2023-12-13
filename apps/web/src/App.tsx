@@ -1,7 +1,7 @@
 import { RouterProvider } from 'react-router-dom'
-import { ThemeProvider } from './context/theme-provider'
-import { Toaster } from '@/components/ui/toaster'
-import { routes } from '@/features/app/routes'
+import { ThemeProvider } from '@bristles/ui/context/theme-provider'
+import { Toaster } from '@bristles/ui/components/ui/toaster'
+import { routes } from './features/app/routes'
 
 export default function App (): JSX.Element {
   return (

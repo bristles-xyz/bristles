@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
+import { Button } from '@bristles/ui/components/ui/button'
+import { Separator } from '@bristles/ui/components/ui/separator'
 import { MinusIcon, PlusIcon } from '@radix-ui/react-icons'
 
 interface ZoomProps {

@@ -1,5 +1,5 @@
+import { type TextSchemaType } from '@bristles/schema'
 import { type GenericHandler } from '../types/handler'
-import { type TextElement } from './types'
 
 import {
   draw,
@@ -16,7 +16,7 @@ import {
   positionInElement
 } from './text'
 
-export interface TextHandler extends GenericHandler<TextElement> {
+export interface TextHandler extends GenericHandler<TextSchemaType> {
   //clone: VoidFunction
 }
 
