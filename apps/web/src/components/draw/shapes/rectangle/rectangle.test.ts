@@ -1,7 +1,7 @@
 import { describe, test, expect, vi } from 'vitest'
 import { type ElementMainAction } from '../types/actions'
-import { type RectangleElement } from './types'
 import { create, endAction, positionInElement, startAction, updateAction } from './rectangle'
+import { RectangleSchemaType } from '@bristles/schema'
 
 const fixedUUID = '550e8400-e29b-41d4-a716-446655440000'
 // Mock the crypto.randomUUID function
@@ -67,7 +67,8 @@ describe('Draw a rectangle', () => {
 })
 
 describe('positionInElement', () => {
-  const rectangle: RectangleElement = {
+  const rectangle: RectangleSchemaType = {
+    version: 2,
     id: '',
     name: 'rectangle',
     x: 10,

@@ -16,7 +16,6 @@ describe('parseLine function', () => {
       angle: 45,
       opacity: 0.8,
       selected: true,
-      stroke: { style: 'Dashed', width: 2 },
       font: { size: 32, family: 'sans-serif', align: 'center' },
       text: 'Hello world'
     }
@@ -38,7 +37,6 @@ describe('parseLine function', () => {
       height: 100,
       angle: 0,
       opacity: 1,
-      stroke: { style: 'Dotted', width: 1 },
       font: { size: 32, family: 'sans-serif', align: 'center' },
       text: 'Hello world'
     }
@@ -55,7 +53,6 @@ describe('parseLine function', () => {
       angle: 0,
       opacity: 1,
       selected: false,
-      stroke: { style: 'Dotted', width: 1 },
       font: { size: 32, family: 'sans-serif', align: 'center' },
       text: 'Hello world'
     }
@@ -72,7 +69,6 @@ describe('parseLine function', () => {
       version: 2,
       color: 'green', // Missing 'id' property
       fill: { style: 'Solid' },
-      stroke: { style: 'Solid', width: 1 },
       font: { size: 32, family: 'sans-serif', align: 'center' }
     }
 

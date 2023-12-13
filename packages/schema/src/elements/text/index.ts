@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { StrokePropertiesSchema } from '../../properties/stroke'
 import { FontPropertiesSchema } from '../..'
 
 export const TextSchema = z.object({
@@ -13,7 +12,6 @@ export const TextSchema = z.object({
   angle: z.number(),
   opacity: z.number(),
   color: z.string(),
-  stroke: StrokePropertiesSchema,
   font: FontPropertiesSchema,
   text: z.string(),
   selected: z.boolean()

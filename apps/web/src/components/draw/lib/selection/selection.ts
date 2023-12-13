@@ -1,15 +1,15 @@
 import { type SelectionState } from './types'
-import { type Element } from '../../shapes/types/element'
 import { ShapeHandler } from '../../shapes'
+import { type ElementSchemaType } from '@bristles/schema'
 
 /**
  * Update selection structure
- * @param {Element[]} elements - List of existing elements.
+ * @param {ElementSchemaType[]} elements - List of existing elements.
  * @param {string} elementId - Element to be selected.
  * @param {SelectionState | undefined} selection - Current selection state.
  * @returns {SelectionState | undefined} - Returns the new selection state, otherwise undefined.
  */
-export const selectElement = (elements: Element[], elementId: string, selection: SelectionState | undefined): SelectionState | undefined => {
+export const selectElement = (elements: ElementSchemaType[], elementId: string, selection: SelectionState | undefined): SelectionState | undefined => {
   const currentElement = elements.find(el => el.id === elementId)
 
   if (currentElement === undefined) {

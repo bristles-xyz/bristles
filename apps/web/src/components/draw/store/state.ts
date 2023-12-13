@@ -1,4 +1,3 @@
-import { type Element } from '../shapes/types/element'
 import { getObjects } from '../lib/history/history'
 import type { DrawingState } from './type'
 import type { ObjectWithHistory } from '../lib/history/types'
@@ -29,8 +28,9 @@ import { SELECTION_UPDATE_ACTION, selectionUpdateReducer } from './selection/upd
 import { SELECTION_COPY_ACTION, selectionCopyReducer } from './selection/copy'
 import { type Properties } from '../shapes/types/handler'
 import { DispatchStateAction } from './store.actions'
+import { ElementSchemaType } from '@bristles/schema'
 
-export const initElementsWithHistory: ObjectWithHistory<Element> = {
+export const initElementsWithHistory: ObjectWithHistory<ElementSchemaType> = {
   history: [[]],
   index: 0
 }
@@ -208,7 +208,7 @@ export function stateReducer (state: DrawingState, action: DispatchStateAction):
   throw Error('Unknown action')
 }
 
-export function getElements (state: DrawingState): Element[] {
+export function getElements (state: DrawingState): ElementSchemaType[] {
   return getObjects(state.elements)
 }
 

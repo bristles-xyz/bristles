@@ -1,10 +1,10 @@
 import { useEffect, useLayoutEffect, useReducer, useRef } from 'react'
 
 import { ShapeHandler } from '../shapes'
-import { type Element } from '../shapes/types/element'
 import { type Point } from '../lib/math/types'
 import { viewportReducer } from '../store/viewport/reducer'
 import { type ViewportState, initState } from '../store/viewport/state'
+import { type ElementSchemaType } from '@bristles/schema'
 
 interface SelectionState {
   type: 'simple' | 'multiple'
@@ -15,7 +15,7 @@ interface SelectionState {
 }
 
 interface UseCanvasRerenderProps {
-  elements: Element[]
+  elements: ElementSchemaType[]
   selection?: SelectionState
 }
 

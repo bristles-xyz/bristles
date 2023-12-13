@@ -1,8 +1,8 @@
 import { getObjects, updateElements } from '../../lib/history/history'
-import { type Element } from '../../shapes/types/element'
 import { type DrawingState } from '../type'
 import { ShapeHandler } from '../../shapes'
 import { type Point } from '../../lib/math/types'
+import { type ElementSchemaType } from '@bristles/schema'
 
 export const SELECTION_COPY_ACTION = 'SELECTION_COPY'
 
@@ -25,7 +25,7 @@ export function selectionCopyReducer (state: DrawingState, action: SelectionCopy
   }
 
   const elements = getObjects(state.elements)
-  const newElements: Element[] = []
+  const newElements: ElementSchemaType[] = []
   elements.forEach(element => {
     if (state.selection !== undefined && state.selection.ids.includes(element.id)) {
       const origin = action.payload.point ?? { x: element.x + 10, y: element.y + 10 }
