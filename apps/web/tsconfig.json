@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@bristles/web/*": ["./src/*"]
     }
   },
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -1,5 +1,5 @@
+import { LineSchemaType } from '@bristles/schema'
 import { type GenericHandler } from '../types/handler'
-import { type LineElement } from './types'
 
 import {
   draw,
@@ -16,7 +16,7 @@ import {
   positionInElement
 } from './line'
 
-export interface LineHandler extends GenericHandler<LineElement> {
+export interface LineHandler extends GenericHandler<LineSchemaType> {
   //clone: VoidFunction
 }
 

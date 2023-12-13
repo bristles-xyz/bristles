@@ -12,3 +12,10 @@
   },
   "exclude": ["node_modules"]
 }
+/*
+{
+  "extends": "@bristles/typescript-config/base.json",
+  "include": ["."],
+  "exclude": ["node_modules"]
+}
+*/

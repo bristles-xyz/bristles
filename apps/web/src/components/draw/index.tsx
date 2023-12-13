@@ -4,7 +4,7 @@ import { useDrawing } from './hooks/use-drawing'
 import { useHotkeys } from './hooks/hotkeys/use-hotkeys'
 import { Menu } from './menu'
 import { useEffect, useRef } from 'react'
-import { isDebugEnable } from '@/config/const'
+import { isDebugEnable } from '@bristles/web/config/const'
 
 
 export function Draw () {
@@ -30,7 +30,6 @@ export function Draw () {
 
   useEffect(() => {
     if (action.name === 'writing' && textAreaRef.current != null) {
-      console.log('set focus')
       textAreaRef.current.focus()
     }
   }, [action])

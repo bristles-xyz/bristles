@@ -2,12 +2,12 @@ import { nearPoints } from '../../lib/math/math'
 import { type Position, type DrawFunctionProps, type Properties } from '../types/handler'
 
 import rough from 'roughjs'
-import { type RectangleElement } from './types'
 import type { ElementDrawingAction, ElementMainAction } from '../types/actions'
 import type { Point } from '../../lib/math/types'
+import { RectangleSchema, RectangleSchemaType } from '@bristles/schema'
 
-export function draw (props: DrawFunctionProps<RectangleElement>) {
-  const { canvas, context, element } = props
+export function draw (element: RectangleSchemaType, props: DrawFunctionProps) {
+  const { canvas, context } = props
 
   const rc = rough.canvas(canvas)
   const generator = rough.generator()
@@ -70,7 +70,7 @@ export function draw (props: DrawFunctionProps<RectangleElement>) {
  * @param {Point} offset - The offset point representing the change in position.
  * @returns {Element} - A new Element moved to the new position based on the current point and offset.
  */
-function moveRectangle (oldElement: RectangleElement, currentPoint: Point, offset: Point): RectangleElement {
+function moveRectangle (oldElement: RectangleSchemaType, currentPoint: Point, offset: Point): RectangleSchemaType {
   const x = currentPoint.x - offset.x
   const y = currentPoint.y - offset.y
   const width = oldElement.width
@@ -85,9 +85,9 @@ function moveRectangle (oldElement: RectangleElement, currentPoint: Point, offse
  * @param {Point} currentPoint - The initial current point representing the starting position of the rectangle.
  * @returns {RectangleElement} - A RectangleElement object created with the provided properties and initial current point.
  */
-export function create (props: ElementDrawingAction): RectangleElement {
+export function create (props: ElementDrawingAction): RectangleSchemaType {
   const { properties, currentPoint } = props
-  const rectangle: RectangleElement = {
+  const rectangle: RectangleSchemaType = {
     id: crypto.randomUUID(),
     name: 'rectangle',
     x: currentPoint.x,
@@ -117,7 +117,7 @@ export function create (props: ElementDrawingAction): RectangleElement {
  * @param {Point} currentPoint - The new current point representing the final position.
  * @returns {Element} - A new Element with the updated size based on the new current point.
  */
-function updateElement (oldElement: RectangleElement, currentPoint: Point): RectangleElement {
+function updateElement (oldElement: RectangleSchemaType, currentPoint: Point): RectangleSchemaType {
   const width = currentPoint.x - oldElement.x
   const height = currentPoint.y - oldElement.y
 
@@ -130,7 +130,7 @@ function updateElement (oldElement: RectangleElement, currentPoint: Point): Rect
  * @param {Element} element - The Element to be rearranged.
  * @returns {Element} - The rearranged Element with position set in the top-left corner.
  */
-function cleanup (oldElement: RectangleElement): RectangleElement {
+function cleanup (oldElement: RectangleSchemaType): RectangleSchemaType {
   const minX = Math.min(oldElement.x, oldElement.x + oldElement.width)
   const minY = Math.min(oldElement.y, oldElement.y + oldElement.height)
 
@@ -143,7 +143,7 @@ function cleanup (oldElement: RectangleElement): RectangleElement {
  * @param {ElementMainAction} action - The action to perform over the element.
  * @returns {Element} - Returns the created/update element
  */
-export function startAction (element: RectangleElement, action: ElementMainAction) {
+export function startAction (element: RectangleSchemaType, action: ElementMainAction) {
   if (action.name === 'drawing') return create(action)
 
   if (action.name === 'resizing') {
@@ -189,7 +189,7 @@ export function startAction (element: RectangleElement, action: ElementMainActio
  * @param {ElementMainAction} action - The action to perform over the element.
  * @returns {Element} - Returns the updated element
  */
-export function updateAction (element: RectangleElement, action: ElementMainAction) {
+export function updateAction (element: RectangleSchemaType, action: ElementMainAction) {
   switch (action.name) {
     case 'drawing':
       if (element !== undefined) {
@@ -210,7 +210,7 @@ export function updateAction (element: RectangleElement, action: ElementMainActi
  * @param {ElementMainAction} action - The action to perform over the element.
  * @returns {Element} - Returns the updated element
  */
-export function endAction (element: RectangleElement, action: ElementMainAction) {
+export function endAction (element: RectangleSchemaType, action: ElementMainAction) {
   switch (action.name) {
     case 'drawing': {
       if (element !== undefined) {
@@ -237,7 +237,7 @@ export function endAction (element: RectangleElement, action: ElementMainAction)
  * @param {Point} point - The point coordinates to be evaluated.
  * @returns {Position} - Returns the position relative to the element
  */
-export function positionInElement (element: RectangleElement, point: Point): Position {
+export function positionInElement (element: RectangleSchemaType, point: Point): Position {
   if (element.name === 'rectangle') {
     if (nearPoints({ x: element.x, y: element.y }, point, 10)) {
       return { type: 'border', cursor: 'nwse-resize', position: 'tl' }
@@ -266,15 +266,16 @@ export function positionInElement (element: RectangleElement, point: Point): Pos
   return { type: 'outside', cursor: 'default', position: '' }
 }
 
-export function toString (element: RectangleElement): string {
+export function toString (element: RectangleSchemaType): string {
   return JSON.stringify(element, null, 2)
 }
 
-export function fromString (element: string): RectangleElement {
-  return JSON.parse(element) as RectangleElement
+export function fromString (element: string): RectangleSchemaType {
+  const object = JSON.parse(element) 
+  return RectangleSchema.parse(object)
 }
 
-export function copy (element: RectangleElement, point: Point): RectangleElement {
+export function copy (element: RectangleSchemaType, point: Point): RectangleSchemaType {
   return {
     ...element,
     id: crypto.randomUUID(),
@@ -283,7 +284,7 @@ export function copy (element: RectangleElement, point: Point): RectangleElement
   }
 }
 
-export function update (element: RectangleElement, properties: Properties): RectangleElement {
+export function update (element: RectangleSchemaType, properties: Properties): RectangleSchemaType {
   console.log('Properties ', { properties })
   return {
     ...element,
@@ -298,6 +299,6 @@ export function allowedProperties (): string[] {
   return ['fill', 'stroke']
 }
 
-export function properties (element: RectangleElement): Properties {
+export function properties (element: RectangleSchemaType): Properties {
   return { color: element.color, opacity: element.opacity, fill: element.fill, stroke: element.stroke }
 }

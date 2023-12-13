@@ -69,10 +69,10 @@ export function useCanvasRerender ({ elements, selection }: UseCanvasRerenderPro
     elements.forEach(element => {
       if (selection !== undefined && selection.type === 'simple' && (selection.ids ?? []).includes(element.id)) {
         // @ts-expect-error find out how to call generic method based on element
-        ShapeHandler(element.name).draw({ canvas, context, element: { ...element, selected: true } })
+        ShapeHandler(element.name).draw({ ...element, selected: true }, { canvas, context })
       } else {
         // @ts-expect-error find out how to call generic method based on element
-        ShapeHandler(element.name).draw({ canvas, context, element: { ...element, selected: false } })
+        ShapeHandler(element.name).draw({ ...element, selected: false }, { canvas, context,  })
       }
     })
 

@@ -1,5 +1,5 @@
+import { type RectangleSchemaType } from '@bristles/schema'
 import { type GenericHandler } from '../types/handler'
-import { type RectangleElement } from './types'
 
 import {
   draw,
@@ -16,7 +16,7 @@ import {
   positionInElement
 } from './rectangle'
 
-export interface RectangleHandler extends GenericHandler<RectangleElement> {
+export interface RectangleHandler extends GenericHandler<RectangleSchemaType> {
   //clone: VoidFunction
 }
 

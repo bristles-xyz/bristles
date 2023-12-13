@@ -2,9 +2,9 @@ import {
   createBrowserRouter, isRouteErrorResponse, useRouteError
 } from 'react-router-dom'
 import { AppLayout } from './layout'
-import { AppMainPage } from '@/features/app/pages/home/main'
+import { AppMainPage } from '@bristles/web/features/app/pages/home/main'
 import { AppAboutPage } from './pages/about'
-import { isDevMode } from '@/config/const'
+import { isDevMode } from '@bristles/web/config/const'
 
 export function ErrorPage (): JSX.Element {
   const error = useRouteError()

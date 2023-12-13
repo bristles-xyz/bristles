@@ -5,4 +5,4 @@ export const StrokePropertiesSchema = z.object({
   width: z.number()
 })
 
-export type StrokeProperties = z.infer<typeof StrokePropertiesSchema>
+export type StrokePropertiesType = z.infer<typeof StrokePropertiesSchema>

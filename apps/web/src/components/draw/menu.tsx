@@ -6,10 +6,10 @@ import {
   MenubarSeparator,
   MenubarShortcut,
   MenubarTrigger
-} from '@/components/ui/menubar'
-import { useTheme } from '@/context/theme-provider'
+} from '@bristles/ui/components/ui/menubar'
+import { useTheme } from '@bristles/ui/context/theme-provider'
 import { CursorArrowIcon, DoubleArrowRightIcon, DownloadIcon, DragHandleDots2Icon, FileIcon, MoonIcon, QuestionMarkCircledIcon, Share1Icon, SlashIcon, SquareIcon, SunIcon, TextIcon } from '@radix-ui/react-icons'
-import { Button } from '../ui/button'
+import { Button } from '@bristles/ui/components/ui/button'
 import { type ControlProps } from './hooks/use-drawing'
 
 // https://www.svgrepo.com/svg/450678/brush-mark
