@@ -88,6 +88,7 @@ function moveRectangle (oldElement: RectangleSchemaType, currentPoint: Point, of
 export function create (props: ElementDrawingAction): RectangleSchemaType {
   const { properties, currentPoint } = props
   const rectangle: RectangleSchemaType = {
+    version: 2,
     id: crypto.randomUUID(),
     name: 'rectangle',
     x: currentPoint.x,

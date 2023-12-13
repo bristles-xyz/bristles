@@ -1,13 +1,13 @@
 import { updateElements } from '../../lib/history/history'
 import { type DrawingState } from '../type'
-import { type Element } from '../../shapes/types/element'
+import { type ElementSchemaType } from '@bristles/schema'
 
 export const STORAGE_LOAD_ACTION = 'STORAGE_LOAD'
 
 export interface StorageLoadAction {
   type: 'STORAGE_LOAD'
   payload: {
-    elements: Element[]
+    elements: ElementSchemaType[]
   }
 }
 
@@ -25,6 +25,6 @@ export function storageLoadReducer (state: DrawingState, action: StorageLoadActi
   }
 }
 
-export function createStorageLoadAction (elements: Element[]): StorageLoadAction {
+export function createStorageLoadAction (elements: ElementSchemaType[]): StorageLoadAction {
   return { type: STORAGE_LOAD_ACTION, payload: { elements } }
 }

@@ -1,6 +1,6 @@
 import { describe, test, expect, vi } from 'vitest'
-import { type TextElement } from './types'
 import { positionInElement } from './text'
+import { TextSchemaType } from '@bristles/schema'
 
 const fixedUUID = '550e8400-e29b-41d4-a716-446655440000'
 // Mock the crypto.randomUUID function
@@ -11,7 +11,8 @@ const crypto = {
 vi.stubGlobal('crypto', crypto)
 
 describe('positionInElement', () => {
-  const text: TextElement = {
+  const text: TextSchemaType = {
+    version: 2,
     id: fixedUUID,
     name: 'text',
     x: 0,

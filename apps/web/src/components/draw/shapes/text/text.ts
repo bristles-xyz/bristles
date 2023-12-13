@@ -59,8 +59,8 @@ export function create (action: ElementDrawingAction): TextSchemaType {
   context.font = '32px sans-serif'
   const width = context.measureText(userText).width
 
-  console.log(width)
   const text: TextSchemaType = {
+    version: 2,
     id: crypto.randomUUID(),
     name: 'text',
     x: currentPoint.x,

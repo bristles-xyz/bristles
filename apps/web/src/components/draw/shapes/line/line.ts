@@ -25,6 +25,7 @@ export function draw (element: LineSchemaType, props: DrawFunctionProps) {
   /**
    * Draw arrow head
    */
+  /*
   if (element.arrow.style === 'head') {
     const headlen = 15
     const angle = Math.atan2(toPoint.y - fromPoint.y, toPoint.x - fromPoint.x)
@@ -47,6 +48,7 @@ export function draw (element: LineSchemaType, props: DrawFunctionProps) {
     context.closePath()
     context.stroke()
   }
+  */
 
   //rc.linearPath([[690, 10], [790, 20], [750, 120], [690, 100]])
 
@@ -88,6 +90,7 @@ export function draw (element: LineSchemaType, props: DrawFunctionProps) {
 export function create (action: ElementDrawingAction): LineSchemaType {
   const { currentPoint, properties } = action
   const line: LineSchemaType = {
+    version: 2,
     id: crypto.randomUUID(),
     name: 'line',
     x: currentPoint.x,
@@ -98,7 +101,7 @@ export function create (action: ElementDrawingAction): LineSchemaType {
     color: properties.color,
     opacity: properties.opacity,
     stroke: properties.stroke ?? { style: 'Dashed', width: 5 },
-    arrow: properties.arrow ?? { style: 'arrow' },
+    // arrow: properties.arrow ?? { style: 'arrow' },
     // points: [{ x: 0, y: 0 }, { x: 0, y: 0 }],
 
     selected: false
@@ -294,7 +297,7 @@ export function update (element: LineSchemaType, properties: Properties): LineSc
     color: properties.color,
     opacity: properties.opacity,
     stroke: properties.stroke ?? element.stroke,
-    arrow: properties.stroke ?? element.arrow
+    //arrow: properties.stroke ?? element.arrow
   }
 }
 
@@ -303,5 +306,5 @@ export function allowedProperties (): string[] {
 }
 
 export function properties (element: LineSchemaType): Properties {
-  return { color: element.color, opacity: element.opacity, arrow: element.arrow, stroke: element.stroke }
+  return { color: element.color, opacity: element.opacity, /*arrow: element.arrow,*/ stroke: element.stroke }
 }

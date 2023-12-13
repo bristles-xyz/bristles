@@ -1,8 +1,8 @@
+import { type ElementSchemaType } from '@bristles/schema'
 import { type Point } from './lib/math/types'
 import { Line } from './shapes/line'
 import { Rectangle } from './shapes/rectangle'
 import { Text } from './shapes/text'
-import { type Element } from './shapes/types/element'
 import { type Properties } from './shapes/types/handler'
 import { type Shapes } from './types'
 export interface CreateElementProps {
@@ -21,7 +21,7 @@ export function createElement (props: CreateElementProps): Element {
   // throw new Error('Not supported shape')
 }*/
 
-function isWithinElement (element: Element, currentPoint: Point) {
+function isWithinElement (element: ElementSchemaType, currentPoint: Point) {
   if (element.name === 'rectangle') {
     return Rectangle.positionInElement(element, currentPoint).type !== 'outside'
   }
@@ -34,10 +34,10 @@ function isWithinElement (element: Element, currentPoint: Point) {
   return false
 }
 
-export function getElementAtPosition (elements: Element[], currentPoint: Point) {
+export function getElementAtPosition (elements: ElementSchemaType[], currentPoint: Point) {
   return elements.find((elem) => isWithinElement(elem, currentPoint))
 }
 
-export function getIndexElementAtPosition (elements: Element[], currentPoint: Point) {
+export function getIndexElementAtPosition (elements: ElementSchemaType[], currentPoint: Point) {
   return elements.findIndex((elem) => isWithinElement(elem, currentPoint))
 }

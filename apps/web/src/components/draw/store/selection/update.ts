@@ -1,8 +1,8 @@
 import { updateElements } from '../../lib/history/history'
 import { type Properties } from '../../shapes/types/handler'
-import { type Element } from '../../shapes/types/element'
 import { type DrawingState } from '../type'
 import { ShapeHandler } from '../../shapes'
+import { type ElementSchemaType } from '@bristles/schema'
 
 export const SELECTION_UPDATE_ACTION = 'SELECTION_UPDATE'
 
@@ -24,7 +24,7 @@ export function selectionUpdateReducer (state: DrawingState, action: SelectionUp
     return { ...state }
   }
 
-  const applyUpdate = (element: Element): Element => {
+  const applyUpdate = (element: ElementSchemaType): ElementSchemaType => {
     if (state.selection !== undefined && state.selection.ids.includes(element.id)) {
       // @ts-expect-error find out how to call generic method based on element
       return ShapeHandler(element.name).update(element, action.payload.properties)

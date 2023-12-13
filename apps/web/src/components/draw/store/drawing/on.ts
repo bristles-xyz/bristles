@@ -1,8 +1,8 @@
+import { ElementSchemaType } from '@bristles/schema'
 import { getObjects, updateElements } from '../../lib/history/history'
 import { type Point } from '../../lib/math/types'
 import { ShapeHandler } from '../../shapes'
 import { requestElementDrawing } from '../../shapes/types/actions'
-import { type Element } from '../../shapes/types/element'
 import { type DrawingState } from '../type'
 
 export const DRAWING_ON_ACTION = 'ON_DRAWING'
@@ -21,8 +21,8 @@ export interface OnDrawingAction {
  * @returns {DrawingState} - The updated state after applying the action.
  */
 export function drawingOnReducer (state: DrawingState, action: OnDrawingAction): DrawingState {
-  const objects = getObjects<Element>(state.elements)
-  const setElements = updateElements<Element>(state.elements)
+  const objects = getObjects<ElementSchemaType>(state.elements)
+  const setElements = updateElements<ElementSchemaType>(state.elements)
   if (state.action.name === 'drawing' && state.action.elementId !== undefined) {
     const elementId = state.action.elementId
     const currentElement = objects.find(el => el.id === elementId)

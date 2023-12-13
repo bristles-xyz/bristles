@@ -13,8 +13,7 @@ describe('Line migration from v1 to v2', () => {
       width: 100,
       height: 100,
       angle: 0,
-      opacity: 1,
-      stroke: { style: 'Dotted', width: 1 }
+      opacity: 1
     }
 
     const expectedMigratedLine = {
@@ -28,8 +27,7 @@ describe('Line migration from v1 to v2', () => {
       height: 100,
       angle: 0,
       opacity: 1,
-      selected: false,
-      stroke: { style: 'Dotted', width: 1 }
+      selected: false
     }
 
     const migratedRectangle = applyV1toV2Migration(lineV1)

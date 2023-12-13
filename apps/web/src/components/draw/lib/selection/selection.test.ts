@@ -1,12 +1,13 @@
-import { type Element } from '../../shapes/types/element'
+
+import { ElementSchemaType } from '@bristles/schema'
 import { selectElement } from './selection'
 import { type SelectionState } from './types'
 import { describe, test, expect } from 'vitest'
 
-const elements: Element[] = [
+const elements: ElementSchemaType[] = [
   // Example elements data (replace with actual data or mock data as needed)
-  { id: '1', name: 'rectangle', width: 50, height: 30, x: 10, y: 10, color: '#fff', selected: false, angle: 0, opacity: 1, fill: { style: 'Solid' }, stroke: { style: 'Dashed', width: 1 } },
-  { id: '2', name: 'text', width: 70, height: 20, x: 10, y: 10, selected: false, angle: 0, text: 'Hello World', opacity: 1, color: 'red', font: { family: 'sans-serif', size: 12, align: 'center' } }
+  { version: 2, id: '1', name: 'rectangle', width: 50, height: 30, x: 10, y: 10, color: '#fff', selected: false, angle: 0, opacity: 1, fill: { style: 'Solid' }, stroke: { style: 'Dashed', width: 1 } },
+  { version: 2, id: '2', name: 'text', width: 70, height: 20, x: 10, y: 10, selected: false, angle: 0, text: 'Hello World', opacity: 1, color: 'red', font: { family: 'sans-serif', size: 12, align: 'center' }}
   // Add more elements as necessary for testing different scenarios
 ]
 

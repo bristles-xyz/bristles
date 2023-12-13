@@ -1,4 +1,4 @@
-import type { ElementSchemaType, FillPropertiesType, FontPropertiesType, StrokePropertiesType } from '@bristles/schema'
+import type { FillPropertiesType, FontPropertiesType, StrokePropertiesType } from '@bristles/schema'
 import { type Point } from '../../lib/math/types'
 import { type ElementDrawingAction, type ElementMainAction } from './actions'
 
